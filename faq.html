@@ -12,15 +12,23 @@
 
 
 <div id="container">
-<div id="header"></div>
 <script>
-    fetch("header.html")
+    // common.htmlを読み込む
+    fetch("common.html")
         .then(response => response.text())
         .then(data => {
-            document.getElementById("header").innerHTML = data;
-        });
+            // 一時的にHTMLをパースするためのdiv要素を作成
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, "text/html");
+            
+            // headerとmenubarを挿入
+            document.getElementById("header").innerHTML = doc.querySelector("#header").innerHTML;
+            document.getElementById("menubar").innerHTML = doc.querySelector("#menubar").innerHTML;
+        })
+        .catch(error => console.error("Error loading common.html:", error));
 </script>
 
+<div id="header"></div>
 
 <div id="contents">
 
@@ -29,7 +37,7 @@
 
 <section>
 
-<h2>よく頂く質問集<span class="small">※開閉ブロックタイプ</span></h2>
+<h2>FAQ<span class="small">※開閉ブロックタイプ</span></h2>
 
 <dl class="faq">
 
@@ -51,7 +59,7 @@
 
 </section>
 
-<section>
+<!-- <section>
 
 <h2>よく頂く質問集<span class="small">※開いているタイプ</span></h2>
 
@@ -73,27 +81,14 @@
 
 </dl>
 
-</section>
+</section> -->
 
 
 </main>
 
 
 <!--開閉ブロック-->
-<div id="menubar">
-
-<h3>MENU</h3>
-
-<nav>
-<ul>
-<li><a href="index.html">ホーム</a></li>
-<li><a href="company.html">会社概要</a></li>
-<li><a href="service.html">サービス紹介</a></li>
-<li><a href="faq.html">よく頂く質問</a></li>
-</ul>
-</nav>
-
-</div>
+<div id="menubar"></div>
 <!--/#menubar-->
 
 
@@ -102,7 +97,6 @@
 
 
 <footer>
-<small>Copyright&copy; <a href="index.html">Sample Company</a> All Rights Reserved.</small>
 <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
 </footer>
 
