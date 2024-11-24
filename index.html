@@ -9,16 +9,26 @@
 </head>
 
 <body>    
-
+    
 <div id="container">
-<div id="header"></div>
 <script>
+    // common.htmlを読み込む
     fetch("common.html")
         .then(response => response.text())
         .then(data => {
-            document.getElementById("header").innerHTML = data;
-        });
+            // 一時的にHTMLをパースするためのdiv要素を作成
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, "text/html");
+            
+            // headerとmenubarを挿入
+            document.getElementById("header").innerHTML = doc.querySelector("#header").innerHTML;
+            document.getElementById("menubar").innerHTML = doc.querySelector("#menubar").innerHTML;
+        })
+        .catch(error => console.error("Error loading common.html:", error));
 </script>
+
+<div id="header"></div>
+
 
 <aside id="mainimg">
 <img src="img/header.jpg" alt="">
@@ -65,7 +75,8 @@
 
 
 <!--開閉    ブロック-->
-<div id="menubar">
+<div id="menubar"></div>
+<!-- <div id="menubar">
 
 <h3>MENU</h3>
 
@@ -78,7 +89,7 @@
 </ul>
 </nav>
 
-</div>
+</div> -->
 <!--/#menubar-->
 
 
