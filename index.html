@@ -10,16 +10,17 @@
 
 <body>
 
+<div id="header"></div>
+<script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+        });
+</script>
+    
 
 <div id="container">
-
-
-<header>
-
-<h1 id="logo"><a href="index.html">サークル：シロサバフグ</a></h1>
-
-</header>
-
 
 <aside id="mainimg">
 <img src="img/header.jpg" alt="">
